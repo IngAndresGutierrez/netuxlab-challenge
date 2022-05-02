@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   siteInfoContainer: {
     textAlign: 'left',
-    marginLeft: 50,
+    marginLeft: 100,
     marginTop: 20,
   },
 }))
