@@ -1,3 +1,7 @@
+# LIVE DEMO
+
+- [Live Demo on Vercel](https://netuxlab-challenge.vercel.app/)
+
 # Information about main commands - Netuxlab Challenge
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
