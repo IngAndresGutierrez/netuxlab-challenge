@@ -16,4 +16,10 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 40,
     fontWeight: 700,
   },
+  downloadPdfButton: {
+    marginTop: 20,
+    borderRadius: 20,
+    width: 300,
+    backgroundColor: theme.palette.primary,
+  },
 }))
