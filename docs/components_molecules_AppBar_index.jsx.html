@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/molecules/AppBar/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/molecules/AppBar/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* import external modules */
+import {
+  Menu,
+  Avatar,
+  Button,
+  AppBar,
+  Toolbar,
+  MenuItem,
+  Typography,
+  IconButton,
+} from '@material-ui/core'
+import {
+  Lock,
+  GetApp,
+  Person,
+  MoreVert,
+  ExitToApp,
+  AccountCircle,
+  MonetizationOn,
+} from '@material-ui/icons'
+import { useState } from 'react'
+
+/* import internal modules */
+import useStyles from './styles'
+import LogoImage from '../../../assets/logo.png'
+
+/** @description This is a functional component for main app bar
+ *  @version 1.0.0
+ *  @since 29/04/2022
+ *  @author Jaime Andrés Gómez Gutiérrez &lt;g.gutierrez.j.andres@gmail.com>
+ *
+ *  @function
+ *  @name AppBar
+ *  @returns {Component} Returns the app bar component
+ **/
+
+const AppBarComponent = () => {
+  const classes = useStyles()
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+
+  const isMenuOpen = Boolean(anchorEl)
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null)
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+    handleMobileMenuClose()
+  }
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget)
+  }
+
+  const goToPage = (path) => {
+    console.log('goToPage')
+  }
+
+  const logoutFunction = () => {
+    console.log('logoutFunction')
+  }
+
+  const menuId = 'primary-search-account-menu'
+  const renderMenu = (
+    &lt;Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      &lt;MenuItem onClick={() => goToPage('/profile')}>
+        &lt;IconButton
+          aria-label="profile"
+          aria-controls="primary-search-profile-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;Person />
+        &lt;/IconButton>
+        &lt;Button className={classes.item} color="inherit">
+          Profile
+        &lt;/Button>
+      &lt;/MenuItem>
+      &lt;MenuItem onClick={logoutFunction}>
+        &lt;IconButton
+          aria-label="logout"
+          aria-controls="primary-search-logout-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;ExitToApp />
+        &lt;/IconButton>
+        &lt;Button className={classes.item} color="inherit">
+          Log out
+        &lt;/Button>
+      &lt;/MenuItem>
+    &lt;/Menu>
+  )
+
+  const mobileMenuId = 'primary-search-account-menu-mobile'
+  const renderMobileMenu = (
+    &lt;Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      &lt;MenuItem>
+        &lt;IconButton
+          aria-label="plans"
+          aria-controls="primary-search-plans-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;MonetizationOn />
+        &lt;/IconButton>
+        &lt;Button
+          onClick={() => goToPage('/subscription')}
+          className={classes.item}
+          color="inherit"
+        >
+          Plans
+        &lt;/Button>
+      &lt;/MenuItem>
+      &lt;MenuItem>
+        &lt;IconButton
+          aria-label="get app"
+          aria-controls="primary-search-get-app-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;GetApp />
+        &lt;/IconButton>
+        &lt;Button
+          onClick={() => goToPage('/getapp')}
+          className={classes.item}
+          color="inherit"
+        >
+          Download
+        &lt;/Button>
+      &lt;/MenuItem>
+      &lt;MenuItem>
+        &lt;IconButton
+          aria-label="login of current user"
+          aria-controls="primary-search-login-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;Lock />
+        &lt;/IconButton>
+        &lt;Button
+          onClick={logoutFunction}
+          className={classes.item}
+          color="inherit"
+        >
+          Login
+        &lt;/Button>
+      &lt;/MenuItem>
+      &lt;MenuItem onClick={handleProfileMenuOpen}>
+        &lt;IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          &lt;AccountCircle />
+        &lt;/IconButton>
+        &lt;Button
+          onClick={() => goToPage('/')}
+          className={classes.item}
+          color="inherit"
+        >
+          Profile
+        &lt;/Button>
+      &lt;/MenuItem>
+    &lt;/Menu>
+  )
+
+  return (
+    &lt;div className={classes.grow}>
+      &lt;AppBar position="static">
+        &lt;Toolbar>
+          &lt;Avatar
+            alt="Logo"
+            src={LogoImage}
+            className={classes.avatar}
+            onClick={() => goToPage('/home')}
+          />
+          &lt;Typography
+            onClick={() => goToPage('/home')}
+            className={classes.title}
+            variant="h6"
+            noWrap
+          >
+            Netux Challenge
+          &lt;/Typography>
+          &lt;div className={classes.grow} />
+          &lt;div className={classes.sectionDesktop}>
+            &lt;div className={classes.grow} />
+            &lt;Button
+              onClick={() => goToPage('/subscription')}
+              className={classes.item}
+              color="inherit"
+            >
+              Plans
+            &lt;/Button>
+            &lt;Button
+              onClick={() => goToPage('/getapp')}
+              className={classes.item}
+              color="inherit"
+            >
+              Download
+            &lt;/Button>
+            &lt;Button
+              onClick={() => goToPage('/')}
+              className={classes.itemLogin}
+              color="inherit"
+            >
+              Sign in
+            &lt;/Button>
+            &lt;IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+              className={classes.handleUserButton}
+            >
+              &lt;AccountCircle />
+            &lt;/IconButton>
+          &lt;/div>
+          &lt;div className={classes.sectionMobile}>
+            &lt;IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              &lt;MoreVert />
+            &lt;/IconButton>
+          &lt;/div>
+        &lt;/Toolbar>
+      &lt;/AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    &lt;/div>
+  )
+}
+
+export default AppBarComponent
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCurrencyFormatUsd">addCurrencyFormatUsd</a></li><li><a href="global.html#addCurrencyFormatUsdWithoutDollarSymbol">addCurrencyFormatUsdWithoutDollarSymbol</a></li><li><a href="global.html#AlertDialog">AlertDialog</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AppBar">AppBar</a></li><li><a href="global.html#Copyright">Copyright</a></li><li><a href="global.html#DataTurn">DataTurn</a></li><li><a href="global.html#ImageTurnProcess">ImageTurnProcess</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#MiniDrawer">MiniDrawer</a></li><li><a href="global.html#MyTurn">MyTurn</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Router">Router</a></li><li><a href="global.html#SnackBar">SnackBar</a></li><li><a href="global.html#Stepper">Stepper</a></li><li><a href="global.html#theme">theme</a></li><li><a href="global.html#UserDataForm">UserDataForm</a></li><li><a href="global.html#UserDataFormLayout">UserDataFormLayout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun May 01 2022 22:45:25 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
